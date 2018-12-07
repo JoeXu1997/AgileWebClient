@@ -4,20 +4,20 @@ export default {
   fetchMovies () {
     return Api().get('/movies')
   },
-  postMovie (donation) {
-    return Api().post('/donations', donation,
+  postMovie (movie) {
+    return Api().post('/addmoviestest', movie,
       { headers: {'Content-type': 'application/json'} })
   },
   removeMovie (id) {
     return Api().delete(`/movies/${id}`)
   },
-  fetchMovie (id) {
-    return Api().get(`/donations/${id}`)
+  fetchOneMovie (id) {
+    return Api().get(`/movie/${id}`)
   },
-  putMovie (id, donation) {
-    console.log('REQUESTING ' + donation._id + ' ' +
-      JSON.stringify(donation, null, 5))
-    return Api().put(`/donations/change/${id}`, donation,
+  putMovie (id, movie) {
+    console.log('REQUESTING ' + movie._id + ' ' +
+      JSON.stringify(movie, null, 5))
+    return Api().put(`/movie/change/${id}`, movie,
       { headers: {'Content-type': 'application/json'} })
   }
 }

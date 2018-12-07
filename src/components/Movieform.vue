@@ -1,17 +1,27 @@
 <template>
   <form @submit.prevent="submit">
-    'name', 'movietype', 'mainActor', 'Directedby',
     <div class="form-group" :class="{ 'form-group--error': $v.name.$error }">
       <label class="form__label">Movie Name</label>
-      <input class="form__input" placeholder="Movie Name" v-model.trim="$v.message.$model"/>
+      <input class="form__input" placeholder="Movie Name" v-model.trim="$v.name.$model"/>
     </div>
     <div class="error" v-if="!$v.name.required">Name is Required</div>
 
-    <div class="form-group" :class="{ 'form-group--error': $v.movietype.$error }">
-      <label class="form__label">Movie Type</label>
-      <input class="form__input" placeholder="Movie Type" v-model.trim="$v.movietype.$model"/>
+    <div class="form-group">
+      <label class="form-label">Select Movie Type</label>
+      <select id="movietype" name="movietype" class="form-control"
+              type="text" v-model="movietype">
+        <option value="null" selected disabled hidden>Choose Movie Type</option>
+        <option value="Horror">Horror</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Document">Document</option>
+        <option value="ScienceFiction">ScienceFiction</option>
+        <option value="Suspense">Suspense</option>
+        <option value="Romance">Romance</option>
+        <option value="Children">Children</option>
+        <option value="Sports">Sports</option>
+        <option value="Others">Others</option>
+      </select>
     </div>
-    <div class="error" v-if="!$v.movietype.required">Type is Required</div>
 
     <div class="form-group" :class="{ 'form-group--error': $v.mainActor.$error }">
       <label class="form__label">Main Actor</label>
@@ -19,17 +29,16 @@
     </div>
     <div class="error" v-if="!$v.mainActor.required">Actor is Required(even null)</div>
 
-
     <div class="form-group" :class="{ 'form-group--error': $v.Directedby.$error }">
       <label class="form__label">Director</label>
-      <input class="form__input" placeholder="Main Actor(only one, null is accrpted if that is Documentary )" v-model.trim="$v.Directedby.$model"/>
+      <input class="form__input" placeholder="Director" v-model.trim="$v.Directedby.$model"/>
     </div>
     <div class="error" v-if="!$v.Directedby.required">Director is Required</div>
     <p>
-      <button class="btn btn-primary btn1" type="submit" :disabled="submitStatus === 'PENDING'">{{ donationBtnTitle }}</button>
+      <button class="btn btn-primary btn1" type="submit" :disabled="submitStatus === 'PENDING'">{{ MovieBtnTitle }}</button>
     </p>
     <p>
-      <a href="#/donations" class="btn btn-primary btn1" role="button">Manage Movies</a>
+      <a href="#/movie" class="btn btn-primary btn1" role="button">Manage Movies</a>
     </p>
     <p class="typo__p" v-if="submitStatus === 'ERROR'">Please Fill in the Form Correctly.</p>
     <p class="typo__p" v-if="submitStatus === 'PENDING'">Add...</p>
@@ -40,7 +49,7 @@
 import Vue from 'vue'
 import VueForm from 'vueform'
 import Vuelidate from 'vuelidate'
-import { required, minLength, between } from 'vuelidate/lib/validators'
+import { required } from 'vuelidate/lib/validators'
 
 Vue.use(VueForm, {
   inputClasses: {
@@ -53,25 +62,30 @@ Vue.use(Vuelidate)
 
 export default {
   name: 'FormData',
-  props: ['donationBtnTitle', 'donation'],
+  props: ['MovieBtnTitle', 'movie'],
   data () {
     return {
-      messagetitle: ' Donate ',
-      message: this.donation.message,
-      paymenttype: this.donation.paymenttype,
-      amount: this.donation.amount,
+      messagetitle: ' AddMovie ',
+      name: this.movie.name,
+      movietype: this.movie.movietype,
+      mainActor: this.movie.mainActor,
+      Directedby: this.movie.Directedby,
       upvotes: 0,
       submitStatus: null
     }
   },
   validations: {
-    message: {
-      required,
-      minLength: minLength(5)
+    name: {
+      required
     },
-    amount: {
-      required,
-      between: between(1, 1000)
+    movietype: {
+      required
+    },
+    mainActor: {
+      required
+    },
+    Directedby: {
+      required
     }
   },
   methods: {
@@ -85,16 +99,16 @@ export default {
         this.submitStatus = 'PENDING'
         setTimeout(() => {
           this.submitStatus = 'OK'
-          var donation = {
-            paymenttype: this.paymenttype,
-            amount: this.amount,
-            upvotes: this.upvotes,
-            message: this.message
+          var movie = {
+            name: this.name,
+            movietype: this.movietype,
+            mainActor: this.mainActor,
+            Directedby: this.Directedby
           }
-          this.donation = donation
+          this.movie = movie
           console.log('Submitting in DonationForm : ' +
-              JSON.stringify(this.donation, null, 5))
-          this.$emit('donation-is-created-updated', this.donation)
+              JSON.stringify(this.movie, null, 5))
+          this.$emit('movie-is-created-updated', this.movie)
         }, 500)
       }
     }
@@ -112,7 +126,7 @@ export default {
     color: red;
     margin-left: 0.25rem;
   }
-  .donate-form .form-control-label.text-left{
+  .movie-form .form-control-label.text-left{
     text-align: left;
   }
 
@@ -127,8 +141,8 @@ export default {
     font-size: x-large;
   }
   .btn1 {
-    width: 300px;
-    font-size: x-large;
+    width: 190px;
+    font-size: 20px;
   }
   p {
     margin-top: 20px;

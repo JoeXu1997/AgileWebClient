@@ -2,7 +2,7 @@
   <div class="hero">
     <h1 class="vue-title">Movie Time !!</h1>
     <br/>
-    <h2 class="vue-title">Just go to the Movie page and make your choice</h2>
+    <h2 style="font-size: 25px">Just go to the Movie page and make your choice</h2>
   </div>
 </template>
 <script>

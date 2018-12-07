@@ -1,5 +1,5 @@
 <template>
-  <div id="app1">
+  <div >
     <h3 class="vue-title"><i class="fa fa-list" style="padding: 3px"></i>{{messagetitle}}</h3>
     <v-client-table :columns="columns" :data="movies" :options="options">
       <a slot="edit" slot-scope="props" class="fa fa-edit fa-2x" @click="editMovie(props.row._id)"></a>
@@ -52,7 +52,7 @@ export default {
     },
     editMovie: function (id) {
       this.$router.params = id
-      this.$router.push('edit')
+      this.$router.push('editMovie')
     },
     deleteMovie: function (id) {
       this.$swal({

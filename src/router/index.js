@@ -6,6 +6,9 @@ import Movie from '../components/Movie'
 import Login from '../components/Login'
 import SignUp from '../components/SignUp'
 import LogOut from '../components/LogOut'
+import AddMovie from '../components/AddMovie'
+import EditMovie from '../components/EditMovie'
+import UserProfile from '../components/UserProfile'
 Vue.use(Router)
 
 const router = new Router({
@@ -38,10 +41,22 @@ const router = new Router({
     {
       path: '/movie',
       name: 'Movie',
-      component: Movie,
-      meta: {
-        requireAuth: true
-      }
+      component: Movie
+    },
+    {
+      path: '/addMovie',
+      name: 'AddMovie',
+      component: AddMovie
+    },
+    {
+      path: '/editMovie',
+      name: 'EditMovie',
+      component: EditMovie
+    },
+    {
+      path: '/profile',
+      name: 'UserProfile',
+      component: UserProfile
     }
   ]
 })

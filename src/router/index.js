@@ -10,6 +10,7 @@ import AddMovie from '../components/AddMovie'
 import EditMovie from '../components/EditMovie'
 import UserProfile from '../components/UserProfile'
 import Slide from '../components/Slide'
+import Comment from '../components/Comment'
 import firebase from 'firebase'
 Vue.use(Router)
 
@@ -67,6 +68,11 @@ const router = new Router({
       path: '/slide',
       name: 'Slide',
       component: Slide
+    },
+    {
+      path: '/comment',
+      name: 'Comment',
+      component: Comment
     }
   ]
 })

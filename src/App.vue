@@ -7,8 +7,9 @@
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
           <b-nav-item to="/"><i class="fa fa-home" style="padding: 5px"> Home</i></b-nav-item>
+          <b-nav-item to="/slide"><i class="fa fa-list" style="padding: 5px"> Movie </i></b-nav-item>
           <b-nav-item to="/movie"><i class="fa fa-list" style="padding: 5px"> VoteRank</i></b-nav-item>
-          <b-nav-item to="/addMovie"><i class="fa fa-list" style="padding: 5px"> Add Movie</i></b-nav-item>
+          <b-nav-item to="/addMovie"><i class="fa fa-list" style="padding: 5px"> Add Movie </i></b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item to="/login"><i class="fa fa-comment" style="padding: 5px"> Login </i></b-nav-item>

@@ -9,6 +9,7 @@ import LogOut from '../components/LogOut'
 import AddMovie from '../components/AddMovie'
 import EditMovie from '../components/EditMovie'
 import UserProfile from '../components/UserProfile'
+import Slide from '../components/Slide'
 Vue.use(Router)
 
 const router = new Router({
@@ -57,6 +58,11 @@ const router = new Router({
       path: '/profile',
       name: 'UserProfile',
       component: UserProfile
+    },
+    {
+      path: '/slide',
+      name: 'Slide',
+      component: Slide
     }
   ]
 })

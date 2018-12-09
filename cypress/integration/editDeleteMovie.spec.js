@@ -20,6 +20,16 @@ describe('Manage Movie Page', () => {
     // Click Manage Donations navbar link
     cy.get(':nth-child(3) > .nav-link > .fa').click()
   })
+  it('allows a movie to be edited', () => {
+    // Click + symbol of 2nd donation in list
+    cy.get(':nth-child(10) > :nth-child(7) > .fa').click()
+    cy.get('label').contains('Movie Name').next().type('newtest')
+    cy.get('#movietype').select('Comedy')
+    cy.get('label').contains('Main Actor').next().type('xuyue')
+    cy.get('label').contains('Director').next().type('xuyue')
+    cy.get('button[type=submit]').click()
+    cy.get(':nth-child(6) > .btn').click()
+  })
 
   it('allows a movie to be deleted', () => {
     cy.get('tbody').find('tr').should('have.length', 10)
@@ -30,12 +40,4 @@ describe('Manage Movie Page', () => {
     cy.get('tbody').find('tr').should('have.length', 9)
   })
 
-  // it('allows a movie to be edited', () => {
-  //   // Click + symbol of 2nd donation in list
-  //   cy.get('tbody').find('tr:nth-child(2)').find('td:nth-child(1)').click()
-  //   cy.get('div.vue-message', {timeout: 5000}).should('contain', 'The message is [ Hope this helps')
-  //   // Unclick same + symbol
-  //   cy.get('tbody').find('tr:nth-child(2)').find('td:nth-child(1)').click()
-  //   cy.get('div.vue-message').should('not.exist')
-  // })
 })

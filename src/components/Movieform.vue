@@ -40,6 +40,7 @@
     <p>
       <a href="#/movie" class="btn btn-primary btn1" role="button">Manage Movies</a>
     </p>
+    <p class="typo__p" v-if="submitStatus === 'OK'">Add Successfully!</p>
     <p class="typo__p" v-if="submitStatus === 'ERROR'">Please Fill in the Form Correctly.</p>
     <p class="typo__p" v-if="submitStatus === 'PENDING'">Add...</p>
   </form>

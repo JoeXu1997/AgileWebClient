@@ -4,7 +4,7 @@
     <div class="container mt-3 mt-sm-5">
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <movie-form :movie="movie" MovieBtnTitle="Update Movie Information" @movie-is-created-updated="updateMovie"></movie-form>
+          <movie-form :movie="movie" MovieBtnTitle="Update Movie" @movie-is-created-updated="updateMovie"></movie-form>
         </div><!-- /col -->
       </div><!-- /row -->
     </div><!-- /container -->

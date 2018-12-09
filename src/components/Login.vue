@@ -6,6 +6,7 @@
     <input type="password" v-model="password" placeholder="Password"><br>
     <button class="login-button" @click="login">Login</button>
     <br/>
+    <p>{{message}}</p>
     <p style="font-size: 20px">You don't have an account ? You can <router-link to="/sign-up">create one</router-link></p>
   </div>
 </template>
@@ -17,7 +18,8 @@ export default {
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      message: ''
     }
   },
   methods: {
@@ -28,6 +30,7 @@ export default {
         },
         (err) => {
           alert('Oops. ' + err.message)
+          this.message = err.message
         }
       )
     }

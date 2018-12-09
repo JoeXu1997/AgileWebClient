@@ -1,6 +1,6 @@
 <template>
   <div class="hero">
-    <p>"pictiure here"</p>
+    <p>pictiure and user information here</p>
   </div>
 </template>
 

@@ -10,6 +10,7 @@ import AddMovie from '../components/AddMovie'
 import EditMovie from '../components/EditMovie'
 import UserProfile from '../components/UserProfile'
 import Slide from '../components/Slide'
+import firebase from 'firebase'
 Vue.use(Router)
 
 const router = new Router({
@@ -32,7 +33,10 @@ const router = new Router({
     {
       path: '/logout',
       name: 'LogOut',
-      component: LogOut
+      component: LogOut,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/home',
@@ -65,5 +69,11 @@ const router = new Router({
       component: Slide
     }
   ]
+})
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser
+  const requireAuth = to.matched.some(record => record.meta.requireAuth)
+  if (requireAuth && !currentUser) next('login')
+  else next()
 })
 export default router

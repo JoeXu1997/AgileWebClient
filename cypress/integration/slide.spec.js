@@ -1,4 +1,4 @@
-describe('Home page', () => {
+describe('Slide page', () => {
   beforeEach(() => {
     cy.visit('#/slide')
   })
@@ -11,7 +11,7 @@ describe('Home page', () => {
     cy.get('.controlbar > :nth-child(9)').click()
   })
   it('should turn to comment page', () => {
-    cy.get('[style=""] > a > .slideimg').click()
+    cy.get('.image-enter-active > a > .slideimg').click()
     cy.get('p').should('contain', 'Movie and Comments Here')
   })
 })

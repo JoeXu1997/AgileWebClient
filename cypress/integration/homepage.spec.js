@@ -32,8 +32,6 @@ describe('Home page', () => {
       cy.url().should('include', '/addMovie')
       cy.get('.ml-auto > :nth-child(1) > .nav-link > .fa').click()
       cy.url().should('include', '/login')
-      cy.get('.ml-auto > :nth-child(2) > .nav-link > .fa').click()
-      cy.url().should('include', '/logout')
       // etc
     })
   })

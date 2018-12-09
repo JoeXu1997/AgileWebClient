@@ -5,9 +5,9 @@
       <div class="slideshow">
         <transition-group tag="ul" name="image">
           <li class="newli" v-for="(img, index) in imgArray" v-show="index===mark" :key="index">
-            <a href="#">
+            <router-link to="/comment">
               <img class="slideimg" :src='img'>
-            </a>
+            </router-link>
           </li>
         </transition-group>
       </div>

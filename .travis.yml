@@ -5,11 +5,9 @@ node_js:
 cache:
   directories:
   - node_modules
-before_install:
-- npm install webpack -D
-install:
-- npm install -g httpserver
+sudo: required
 before_script:
+- npm install -g httpserver
 - npm run custom-build
 - cd dist && httpserver -p 8080 &
 script:

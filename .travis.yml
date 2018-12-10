@@ -5,10 +5,19 @@ node_js:
 cache:
   directories:
   - node_modules
+install:
+- npm install -g httpserver
 before_script:
 - npm run custom-build
-- httpserver
+- cd dist && httpserver -p 8080 &
 script:
 - npx cypress run
+deploy:
+  provider: surge
+  skip_cleanup: true
+  domain: mymovie.surge.sh
+  project: ./dist
+  on:
+    branch: master
 
 

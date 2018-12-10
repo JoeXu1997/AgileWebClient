@@ -20,6 +20,7 @@
     "firebase": "^5.6.0",
     "firebase-admin": "^6.3.0",
     "http2": "^3.3.7",
+    "surge": "^0.20.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-sweetalert2": "^1.5.9",

@@ -34,6 +34,13 @@
       <input class="form__input" placeholder="Director" v-model.trim="$v.Directedby.$model"/>
     </div>
     <div class="error" v-if="!$v.Directedby.required">Director is Required</div>
+
+    <div class="form-group" :class="{ 'form-group--error': $v.description.$error }">
+      <label class="form__label">Description</label>
+      <textarea class="textarea" placeholder="Brief Description" v-model.trim="$v.description.$model"/>
+    </div>
+    <div class="error" v-if="!$v.description.required">Description is Required</div>
+
     <p>
       <button class="btn btn-primary btn1" type="submit" :disabled="submitStatus === 'PENDING'">{{ MovieBtnTitle }}</button>
     </p>
@@ -71,6 +78,7 @@ export default {
       movietype: this.movie.movietype,
       mainActor: this.movie.mainActor,
       Directedby: this.movie.Directedby,
+      description: this.movie.description,
       upvotes: 0,
       submitStatus: null
     }
@@ -86,6 +94,9 @@ export default {
       required
     },
     Directedby: {
+      required
+    },
+    description: {
       required
     }
   },
@@ -104,7 +115,8 @@ export default {
             name: this.name,
             movietype: this.movietype,
             mainActor: this.mainActor,
-            Directedby: this.Directedby
+            Directedby: this.Directedby,
+            description: this.description
           }
           this.movie = movie
           console.log('Submitting in DonationForm : ' +
@@ -121,6 +133,14 @@ export default {
   #app1 {
     width: 95%;
     margin: 0 auto;
+  }
+  .textarea{
+    width: 540px;
+    height: 80px;
+    border: 1px solid silver;
+    border-radius: 4px;
+    background: white;
+    padding: 5px 10px;
   }
   .required-field > label::after {
     content: '*';

@@ -1,13 +1,11 @@
 <template>
   <div class="hero">
-    <h3 style="font-size: 30px">Eachone You like Is Here!</h3>
+    <h3 style="font-size: 30px">Each One You Like Is Here!</h3>
     <div class="slide" v-on:mouseover="stop()" v-on:mouseout="move()">
       <div class="slideshow">
         <transition-group tag="ul" name="image">
           <li class="newli" v-for="(img, index) in imgArray" v-show="index===mark" :key="index">
-            <router-link to="/comment">
               <img class="slideimg" :src='img'>
-            </router-link>
           </li>
         </transition-group>
       </div>

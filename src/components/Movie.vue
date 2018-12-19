@@ -2,8 +2,9 @@
   <div >
     <h3 class="vue-title"><i class="fa fa-list" style="padding: 3px"></i>{{messagetitle}}</h3>
     <v-client-table :columns="columns" :data="movies" :options="options">
-      <a slot="edit" slot-scope="props" class="fa fa-edit fa-2x" @click="editMovie(props.row._id)"></a>
-      <a slot="remove" slot-scope="props" class="fa fa-trash-o fa-2x" @click="deleteMovie(props.row._id)"></a>
+      <a slot="comment" slot-scope="props" class="fa fa-comment fa-2x" @click="commentMovie(props.row.name)"></a>
+      <a slot="edit" slot-scope="props" class="fa fa-edit fa-2x" v-show="checkUser()" @click="editMovie(props.row._id)"></a>
+      <a slot="remove" slot-scope="props" class="fa fa-trash-o fa-2x" v-show="checkUser()" @click="deleteMovie(props.row._id)"></a>
     </v-client-table>
   </div>
 </template>
@@ -12,24 +13,26 @@
 import Vue from 'vue'
 import VueTables from 'vue-tables-2'
 import movieservices from '@/services/movieservices'
-
+import userservice from '@/services/userservices'
+import firebase from 'firebase'
 Vue.use(VueTables.ClientTable, {compileTemplates: true, filterByColumn: true})
 export default {
   name: 'Movies',
   data () {
     return {
       messagetitle: ' Movies Vote Rank ',
+      admin: false,
+      usertype: '',
       movies: [],
       errors: [],
-      columns: ['_id', 'name', 'movietype', 'mainActor', 'Directedby', 'upvotes', 'edit', 'remove'],
+      columns: ['_id', 'name', 'movietype', 'mainActor', 'Directedby', 'comment', 'edit', 'remove'],
       options: {
         headings: {
           _id: 'ID',
           name: 'Movie Name',
           movietype: 'Type',
           mainActor: 'Main Actor',
-          Directedby: 'Director',
-          upvotes: 'Votes'
+          Directedby: 'Director'
         }
       }
     }
@@ -38,6 +41,22 @@ export default {
     this.loadMovies()
   },
   methods: {
+    checkUser: function () {
+      if (firebase.auth().currentUser) {
+        var username = firebase.auth().currentUser.email
+        userservice.fetchOneUser(username)
+          .then(user => {
+            if (user) {
+              this.usertype = user.data.usertype
+              if (this.usertype === 'admin') {
+                console.log('in')
+                this.admin = true
+              }
+            } else console.log('user not exist')
+          })
+      }
+      return this.admin
+    },
     loadMovies: function () {
       movieservices.fetchMovies()
         .then(response => {
@@ -49,6 +68,10 @@ export default {
           this.errors.push(error)
           console.log(error)
         })
+    },
+    commentMovie: function (name) {
+      this.$router.params = name
+      this.$router.push('comment')
     },
     editMovie: function (id) {
       this.$router.params = id

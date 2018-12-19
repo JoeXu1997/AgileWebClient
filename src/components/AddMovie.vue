@@ -14,28 +14,63 @@
 
 <script>
 import movieservice from '@/services/movieservices'
+import userservice from '@/services/userservices'
 import movieform from '@/components/Movieform'
+import firebase from 'firebase'
 
 export default {
   data () {
     return {
       movie: {name: '', movietype: '', mainActor: '', Directedby: ''},
-      messagetitle: ' Add New Movie '
+      messagetitle: ' Add New Movie ',
+      admin: false
     }
   },
   components: {
     'movie-form': movieform
   },
+  created () {
+    this.checkUser()
+  },
   methods: {
+    checkUser: function () {
+      if (firebase.auth().currentUser) {
+        var username = firebase.auth().currentUser.email
+        userservice.fetchOneUser(username)
+          .then(user => {
+            if (user) {
+              this.usertype = user.data.usertype
+              if (this.usertype === 'admin') {
+                console.log('in')
+                this.admin = true
+              }
+            } else console.log('user not exist')
+          })
+      }
+      return this.admin
+    },
     addMovie: function (movie) {
-      movieservice.postMovie(movie)
-        .then(response => {
-          console.log(response)
+      if (this.admin) {
+        movieservice.postMovie(movie)
+          .then(response => {
+            console.log(response)
+          })
+          .catch(error => {
+            this.errors.push(error)
+            console.log(error)
+          })
+      } else {
+        this.$swal({
+          title: 'You are NOT Admin user',
+          text: 'You can\'t Undo this action',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
+          showCloseButton: true
+          // showLoaderOnConfirm: true
         })
-        .catch(error => {
-          this.errors.push(error)
-          console.log(error)
-        })
+      }
     }
   }
 }

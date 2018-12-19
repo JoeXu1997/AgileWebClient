@@ -19,5 +19,8 @@ export default {
       JSON.stringify(movie, null, 5))
     return Api().put(`/movie/change/${id}`, movie,
       { headers: {'Content-type': 'application/json'} })
+  },
+  findMoviesByName (name) {
+    return Api().get(`/movies/name/${name}`)
   }
 }

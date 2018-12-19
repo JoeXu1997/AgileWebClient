@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from '../components/Home'
 import Movie from '../components/Movie'
 import Login from '../components/Login'
 import SignUp from '../components/SignUp'
@@ -10,6 +9,8 @@ import AddMovie from '../components/AddMovie'
 import EditMovie from '../components/EditMovie'
 import UserProfile from '../components/UserProfile'
 import Slide from '../components/Slide'
+import Search from '../components/Search'
+import MovieDetail from '../components/MovieDetail'
 import Comment from '../components/Comment'
 import firebase from 'firebase'
 Vue.use(Router)
@@ -18,8 +19,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'Slide',
+      component: Slide
     },
     {
       path: '/login',
@@ -38,11 +39,6 @@ const router = new Router({
       meta: {
         requireAuth: true
       }
-    },
-    {
-      path: '/home',
-      name: 'Home',
-      component: Home
     },
     {
       path: '/movie',
@@ -65,9 +61,14 @@ const router = new Router({
       component: UserProfile
     },
     {
-      path: '/slide',
-      name: 'Slide',
-      component: Slide
+      path: '/search',
+      name: 'Search',
+      component: Search
+    },
+    {
+      path: '/detail',
+      name: 'MovieDetail',
+      component: MovieDetail
     },
     {
       path: '/comment',

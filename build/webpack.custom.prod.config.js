@@ -79,8 +79,6 @@ module.exports = {
           fallback: "vue-style-loader",
           use: "css-loader"
         })
-
-        //  use: ['style-loader','css-loader']
       },
       {
         test: /\.vue$/,

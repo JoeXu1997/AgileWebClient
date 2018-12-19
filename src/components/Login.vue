@@ -22,10 +22,14 @@ export default {
       message: ''
     }
   },
+  created () {
+    this.checkLogin()
+  },
   methods: {
     login: function () {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
         (user) => {
+          console.log(firebase.auth().currentUser.email)
           this.$router.replace('profile')
         },
         (err) => {
@@ -33,6 +37,11 @@ export default {
           this.message = err.message
         }
       )
+    },
+    checkLogin: function () {
+      if (firebase.auth().currentUser) {
+        this.$router.replace('profile')
+      }
     }
   }
 }

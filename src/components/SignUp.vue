@@ -12,19 +12,28 @@
 
 <script>
 import firebase from 'firebase'
+import userserivce from '@/services/userservices'
 export default {
   name: 'signUp',
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      username: '',
+      usertype: ''
     }
   },
   methods: {
     signUp: function () {
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
         (user) => {
-          this.$router.replace('home')
+          var newuser = {
+            username: this.email,
+            password: this.password,
+            usertype: 'common'
+          }
+          userserivce.addUser(newuser)
+          this.$router.replace('/')
         },
         (err) => {
           alert('Oops. ' + err.message)
